@@ -1,0 +1,25 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <button mat-button class="menu-button">
+      <mat-icon>home</mat-icon>
+      <a href="/" style="color: #f0f0f0">Home</a>
+    </button>
+    <button *ngIf="role" mat-button class="menu-button">
+      <mat-icon>person</mat-icon>
+      <a href="/profile" style="color: #f0f0f0">Profile</a>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button">
+      <a href="/auditories" style="color: #f0f0f0">Auditories</a>
+    </button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="mat-elevation-z7">
+      <div  style="width: 96%; padding-left: 2.5%">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
