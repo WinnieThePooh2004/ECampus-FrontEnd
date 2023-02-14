@@ -1,0 +1,60 @@
+<h1>All auditories:</h1>
+<div *ngIf="editEnabled">
+  <button (click)="createNew()" class="btn-success btn-action">Create new</button>
+  <span *ngIf="editModel != null"> | </span>
+  <button *ngIf="editModel != null" (click)="cancelEdit()" class="btn-danger btn-action">
+    Cancel
+  </button>
+</div>
+<br/>
+<div *ngIf="editModel != null">
+  <app-auditory-edit-form [title]="editFormTitle" [model]="editModel"
+                          (onSubmit)="refreshData()"></app-auditory-edit-form>
+  <br/>
+</div>
+<div>
+  <mat-form-field class="mat-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput [value]="parameters.name" (input)="nameChanged($any($event.target).value)">
+  </mat-form-field>
+  <span>{{' '}}</span>
+  <mat-form-field>
+    <mat-label>Building</mat-label>
+    <input matInput [value]="parameters.building" (input)="buildingChanged($any($event.target).value)">
+  </mat-form-field>
+</div>
+<table [dataSource]="tableData" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="sortChanged($event)">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let i = index">{{i + 1 + (parameters.pageNumber - 1) * parameters.pageSize}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let auditory">{{auditory.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="building">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Building</th>
+    <td mat-cell *matCellDef="let auditory">{{auditory.building}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let auditory">
+      <mat-button-toggle *ngIf="editEnabled" class="btn-info" (click)="edit(auditory.id)">Edit</mat-button-toggle>
+      <span *ngIf="editEnabled"> | </span>
+      <mat-button-toggle class="btn-info">View timetable</mat-button-toggle>
+      <span *ngIf="editEnabled"> | </span>
+      <mat-button-toggle *ngIf="editEnabled" class="btn-danger" (click)="delete(auditory.id)">Delete</mat-button-toggle>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let _; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator (page)="paginationInfoChanged($event)"
+               [pageSizeOptions]="pageSizeOptions"
+               [pageIndex]="parameters.pageNumber - 1" [pageSize]="parameters.pageSize"
+               aria-label="Select page">
+</mat-paginator>

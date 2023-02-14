@@ -1,0 +1,22 @@
+<div class="form-place">
+  <div class="form-background">
+    <h2 style="width: 100%; text-align: center; color: rgb(230, 230, 230)">{{title}}</h2>
+    <div class="form-group">
+      <form ngForm class="form" (submit)="submit()">
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [value]="model.name" (input)="model.name = $any($event.target).value" placeholder="1">
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Building</mat-label>
+          <input matInput [value]="model.building" (input)="model.building = $any($event.target).value" placeholder="12/1">
+        </mat-form-field>
+        <br/>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

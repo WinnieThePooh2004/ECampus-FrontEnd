@@ -1,0 +1,15 @@
+<mat-toolbar>
+  <div *ngIf="!isLoggedIn"  class="right">
+    <button class="btn-action btn-success">
+      Sign up
+    </button> |
+    <button (click)="login()" class="btn-success btn-action">
+      Login
+    </button>
+  </div>
+  <div  *ngIf="isLoggedIn" class="right">
+    <button (click)="logout()" class="btn-danger btn-action">
+      Logout
+    </button>
+  </div>
+</mat-toolbar>
