@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Auditory} from "../../../../Models/Auditory";
 import {EditFormBase} from "../EditFormBase";
-import {Requests} from "../../../../Requests/Requests";
 
 @Component({
   selector: 'app-auditory-edit-form',
@@ -10,8 +9,8 @@ import {Requests} from "../../../../Requests/Requests";
 })
 
 export class AuditoryEditFormComponent extends EditFormBase<Auditory>{
-  public constructor(requests: Requests<Auditory>) {
-    super(requests);
+  public constructor() {
+    super();
     this.model = new Auditory();
   }
 }

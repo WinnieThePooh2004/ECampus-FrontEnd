@@ -1,7 +1,6 @@
-import {IModel} from "./IModel";
+import {Model} from "./Model";
 
-export class Auditory implements IModel{
-  public id : number = 0;
+export class Auditory extends Model{
   public name: string = '';
   public building: string = '';
 }

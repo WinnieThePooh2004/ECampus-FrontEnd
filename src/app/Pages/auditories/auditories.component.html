@@ -9,7 +9,7 @@
 <br/>
 <div *ngIf="editModel != null">
   <app-auditory-edit-form [title]="editFormTitle" [model]="editModel"
-                          (onSubmit)="refreshData()"></app-auditory-edit-form>
+                          (onSubmit)="save($event)"></app-auditory-edit-form>
   <br/>
 </div>
 <div>

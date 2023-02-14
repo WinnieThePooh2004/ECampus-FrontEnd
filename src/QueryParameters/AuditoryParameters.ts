@@ -6,7 +6,8 @@ export class AuditoryParameters extends QueryParameters{
   public building: string = '';
 
   public constructor() {
-    super(1, 10, SortOrder.Ascending, 'name');
+    super();
+    this.orderBy = 'name';
   }
 
   public override toQueryString(): string {

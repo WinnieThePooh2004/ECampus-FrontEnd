@@ -4,6 +4,7 @@ import {AuditoryParameters} from "../../../QueryParameters/AuditoryParameters";
 import {DataTableBase} from "../../Components/PageBases/DataTableBase";
 import {Requests} from "../../../Requests/Requests";
 import {ParametersRequests} from "../../../Requests/ParametersRequests";
+import {AuditoriesRequests} from "../../../Requests/AuditoriesRequests";
 
 @Component({
   selector: 'app-auditories',
@@ -12,8 +13,8 @@ import {ParametersRequests} from "../../../Requests/ParametersRequests";
 })
 export class AuditoriesComponent extends DataTableBase<Auditory, AuditoryParameters>{
   displayedColumns: string[] = ['position', 'name', 'building', 'actions'];
-  public constructor(requests: Requests<Auditory>, parametersRequests: ParametersRequests<Auditory, AuditoryParameters>) {
-    super(requests, parametersRequests);
+  public constructor(requests : AuditoriesRequests) {
+    super(requests);
     this.parameters = new AuditoryParameters();
   }
 

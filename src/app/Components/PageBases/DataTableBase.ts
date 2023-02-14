@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {IModel} from "../../../Models/IModel";
+import {Model} from "../../../Models/Model";
 import {QueryParameters} from "../../../QueryParameters/QueryParameters";
-import {Requests} from "../../../Requests/Requests";
 import {ParametersRequests} from "../../../Requests/ParametersRequests";
 import {MatTableDataSource} from "@angular/material/table";
 import {PaginationResponse} from "../../../Models/PaginationResponse";
@@ -12,7 +11,7 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 @Component({
   template: ''
 })
-export class DataTableBase<TData extends IModel, TParameters extends QueryParameters> implements OnInit{
+export class DataTableBase<TData extends Model, TParameters extends QueryParameters> implements OnInit{
   public pageSizeOptions = [5, 10, 20, 50, 100];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   public tableData: MatTableDataSource<TData> = new MatTableDataSource<TData>([]);
@@ -21,7 +20,7 @@ export class DataTableBase<TData extends IModel, TParameters extends QueryParame
   public editEnabled = false;
   protected parameters!: TParameters;
 
-  public constructor(private requests: Requests<TData>, private parametersRequests: ParametersRequests<TData, TParameters>) {
+  public constructor(private requests: ParametersRequests<TData, TParameters>) {
     this.editEnabled = localStorage.getItem('role') == 'Admin';
   }
 
@@ -36,7 +35,7 @@ export class DataTableBase<TData extends IModel, TParameters extends QueryParame
   }
 
   public refreshData(): void{
-    this.parametersRequests.getByParameters(this.parameters).subscribe({
+    this.requests.getByParameters(this.parameters).subscribe({
         next: (response: PaginationResponse<TData>) => {
           this.tableData.data = response.data;
           this.paginator!.length = response.metadata.totalCount;
@@ -71,6 +70,18 @@ export class DataTableBase<TData extends IModel, TParameters extends QueryParame
         this.editModel = response;
         this.editFormTitle = 'Edit';
       }
+    });
+  }
+
+  public save(model: TData){
+    if(model.id == 0){
+      this.requests.create(model).subscribe({
+        next: () => this.refreshData()
+      });
+      return;
+    }
+    this.requests.update(model).subscribe({
+      next: () => this.refreshData()
     });
   }
 }
