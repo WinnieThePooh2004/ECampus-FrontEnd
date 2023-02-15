@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent extends DataTableBase<Student, StudentParameters> {
-  displayedColumns = ['position', 'lastName', 'firstName', 'email', 'actions'];
+  public displayedColumns = ['position', 'lastName', 'firstName', 'email', 'actions'];
 
   public constructor(requests: StudentsRequests, route: ActivatedRoute) {
     super(requests);

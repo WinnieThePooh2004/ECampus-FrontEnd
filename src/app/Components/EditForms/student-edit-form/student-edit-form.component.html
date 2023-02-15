@@ -4,11 +4,11 @@
     <div class="form-group">
       <form class="form" (submit)="submit()">
         <mat-form-field class="mat-form-field form-field">
-          <mat-label>Name</mat-label>
+          <mat-label>First name</mat-label>
           <input matInput [value]="model.firstName" (change)="model.firstName = $any($event.target).value">
         </mat-form-field>
         <mat-form-field class="mat-form-field form-field">
-          <mat-label>Name</mat-label>
+          <mat-label>Last name</mat-label>
           <input matInput [value]="model.lastName" (change)="model.lastName = $any($event.target).value">
         </mat-form-field>
         <div class="form-button">

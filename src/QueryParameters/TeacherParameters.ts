@@ -4,12 +4,12 @@ import {Teacher} from "../Models/Teacher";
 export class TeacherParameters extends QueryParameters<Teacher>{
   public lastName = '';
   public firstName = '';
-  public departmentId = '';
+  public departmentId = 0;
   public userIdCanBeNull = true;
 
   public constructor() {
     super();
-    this.orderBy = 'firstName';
+    this.orderBy = 'lastName';
   }
 
   public override toQueryString(): string {

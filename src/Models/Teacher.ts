@@ -8,7 +8,7 @@ export class Teacher extends Model{
   public lastName = '';
   public userEmail: string | null = null;
   public scienceDegree = ScienceDegree.Master;
-  public subjects = new ArrayList<Subject>();
+  public subjects: ArrayList<Subject> | null = null;
 }
 
 export enum ScienceDegree{
