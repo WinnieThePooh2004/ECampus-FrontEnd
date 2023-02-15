@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 import {Auditory} from "../../../Models/Auditory";
 import {AuditoryParameters} from "../../../QueryParameters/AuditoryParameters";
 import {DataTableBase} from "../../Components/PageBases/DataTableBase";
-import {Requests} from "../../../Requests/Requests";
-import {ParametersRequests} from "../../../Requests/ParametersRequests";
 import {AuditoriesRequests} from "../../../Requests/AuditoriesRequests";
 
 @Component({

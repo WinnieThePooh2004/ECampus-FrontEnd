@@ -3,7 +3,6 @@ import {DataTableBase} from "../../Components/PageBases/DataTableBase";
 import {Faculty} from "../../../Models/Faculty";
 import {FacultyParameters} from "../../../QueryParameters/FacultyParameters";
 import {FacultiesRequests} from "../../../Requests/FacultiesRequests";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-faculties',
@@ -12,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class FacultiesComponent extends DataTableBase<Faculty, FacultyParameters>{
   displayedColumns = ['position', 'name', 'actions'];
-  public constructor(requests: FacultiesRequests, private router: Router) {
+  public constructor(requests: FacultiesRequests) {
     super(requests);
     this.parameters = new FacultyParameters();
   }

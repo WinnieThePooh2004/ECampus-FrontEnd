@@ -9,4 +9,8 @@ export class UserParameters extends QueryParameters<User>{
     super();
     this.orderBy = 'email';
   }
+
+  public override toQueryString(): string {
+    return super.toQueryString() + `&email=${this.email}&username=${this.username}`;
+  }
 }

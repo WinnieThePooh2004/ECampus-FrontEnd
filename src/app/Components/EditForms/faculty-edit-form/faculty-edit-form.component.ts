@@ -8,7 +8,5 @@ import {Faculty} from "../../../../Models/Faculty";
   styleUrls: ['./faculty-edit-form.component.css']
 })
 export class FacultyEditFormComponent extends EditFormBase<Faculty>{
-  public constructor() {
-    super();
-  }
+
 }

@@ -11,6 +11,6 @@ export class DepartmentParameters extends QueryParameters<Department>{
   }
 
   public override toQueryString(): string {
-    return super.toQueryString() + `&name=${this.name}&facultyId=${this.facultyId}`;
+    return super.toQueryString() + `&departmentName=${this.name}&facultyId=${this.facultyId}`;
   }
 }

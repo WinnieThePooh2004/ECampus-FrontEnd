@@ -22,4 +22,9 @@ export class DepartmentsComponent extends DataTableBase<Department, DepartmentPa
     this.parameters.name = name;
     this.refreshData();
   }
+
+  createNew() {
+    this.editModel = new Department();
+    this.editModel.facultyId = this.parameters.facultyId;
+  }
 }

@@ -1,4 +1,23 @@
 <h1>All departments:</h1>
+<div *ngIf="editEnabled">
+  <button (click)="createNew()" class="btn-success btn-action">Create new</button>
+  <span *ngIf="editModel != null"> | </span>
+  <button *ngIf="editModel != null" (click)="cancelEdit()" class="btn-danger btn-action">
+    Cancel
+  </button>
+</div>
+<br/>
+<div *ngIf="editModel != null">
+  <app-department-edit-form [title]="editFormTitle" [model]="editModel"
+                         (onSubmit)="save($event)"></app-department-edit-form>
+  <br/>
+</div>
+<div>
+  <mat-form-field class="mat-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput [value]="parameters.name" (input)="nameChanged($any($event.target).value)">
+  </mat-form-field>
+</div>
 <table [dataSource]="tableData" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="sortChanged($event)">
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef>No.</th>

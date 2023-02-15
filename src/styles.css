@@ -53,6 +53,12 @@ form.form{
   background-color: #002b5c;
 }
 
+h1, h2, h3.form-title{
+  width: 100%;
+  text-align: center;
+  color: rgb(230, 230, 230);
+}
+
 .btn-success{
   background-color: rgb(70, 200, 70);
   border-color: darkgoldenrod;

@@ -11,6 +11,5 @@ import {EditFormBase} from "../EditFormBase";
 export class AuditoryEditFormComponent extends EditFormBase<Auditory>{
   public constructor() {
     super();
-    this.model = new Auditory();
   }
 }
