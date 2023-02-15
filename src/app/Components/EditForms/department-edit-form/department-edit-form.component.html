@@ -1,1 +1,18 @@
-<p>department-edit-form works!</p>
+<div class="form-place">
+  <div class="form-background">
+    <h2 class="form-title">{{title}}</h2>
+    <div class="form-group">
+      <form class="form" (submit)="submit()">
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [value]="model.name" (change)="model.name = $any($event.target).value">
+        </mat-form-field>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-group">
+    </div>
+  </div>
+</div>

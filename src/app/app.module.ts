@@ -32,7 +32,6 @@ import {PasswordChangeFormComponent} from './Components/EditForms/password-chang
 import {StudentEditFormComponent} from './Components/EditForms/student-edit-form/student-edit-form.component';
 import {SubjectEditFormComponent} from './Components/EditForms/subject-edit-form/subject-edit-form.component';
 import {TeacherEditFormComponent} from './Components/EditForms/teacher-edit-form/teacher-edit-form.component';
-import {UserRoleEditFormComponent} from './Components/EditForms/user-role-edit-form/user-role-edit-form.component';
 import {UsersComponent} from './Pages/users/users.component';
 import {SignUpComponent} from './Pages/sign-up/sign-up.component';
 import {CoursesComponent} from './Pages/courses/courses.component';
@@ -49,6 +48,7 @@ import {TimetableComponent} from './Pages/timetable/timetable.component';
 import {ProfileComponent} from './Pages/profile/profile.component';
 import {HomeComponent} from './Pages/home/home.component';
 import {RouterModule} from "@angular/router";
+import {UserEditFormComponent} from './Components/EditForms/user-edit-form/user-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,6 @@ import {RouterModule} from "@angular/router";
     StudentEditFormComponent,
     SubjectEditFormComponent,
     TeacherEditFormComponent,
-    UserRoleEditFormComponent,
     UsersComponent,
     SignUpComponent,
     CoursesComponent,
@@ -85,6 +84,7 @@ import {RouterModule} from "@angular/router";
     TimetableComponent,
     ProfileComponent,
     HomeComponent,
+    UserEditFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +106,17 @@ import {RouterModule} from "@angular/router";
       {path: '', component: HomeComponent},
       {path: 'auditories', component: AuditoriesComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'faculties', component: FacultiesComponent}
+      {path: 'faculties', component: FacultiesComponent},
+      {path: 'departments/:facultyId', component: DepartmentsComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'groups/:departmentId', component: GroupsComponent},
+      {path: 'students/:groupId', component: StudentsComponent},
+      {path: 'teachers/:departmentId', component: TeachersComponent},
+      {path: 'signUp', component: SignUpComponent},
+      {path: 'subjects', component: SubjectsComponent},
+      {path: 'courses', component: CoursesComponent},
+      {path: 'tasks/:courseId', component: CourseTasksComponent},
+      {path: 'submissions/:courseTaskId', component: TaskSubmissionsComponent}
     ])
   ],
   providers: [],

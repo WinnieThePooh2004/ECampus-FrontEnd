@@ -1,13 +1,11 @@
-import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-@Injectable({
-  providedIn: "root"
-})
 export class Requests<TData>{
-  private readonly url : string = 'http://localhost:5000/api/Auditories';
-  constructor(private client: HttpClient) {
+  private static readonly baseUrl : string = 'http://localhost:5000/api';
+  protected readonly url;
+  constructor(protected client: HttpClient, apiControllerName: string) {
+    this.url = `${Requests.baseUrl}/${apiControllerName}`;
   }
 
   public getById(id: number): Observable<TData>{

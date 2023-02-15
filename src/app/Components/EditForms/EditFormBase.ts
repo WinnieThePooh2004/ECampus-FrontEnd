@@ -1,34 +1,17 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {IModel} from "../../../Models/IModel";
-import {Requests} from "../../../Requests/Requests";
 
 @Component({
   template: ''
 })
-export abstract class EditFormBase<TModel extends IModel> implements OnInit{
+export abstract class EditFormBase<TModel> implements OnInit{
   @Input() public model!: TModel;
   @Input() public title!: string;
-  @Output() onSubmit: EventEmitter<void> = new EventEmitter<void>();
-  protected constructor(private requests: Requests<TModel>) {
+  @Output() onSubmit: EventEmitter<TModel> = new EventEmitter<TModel>();
+  protected constructor() {
   }
 
   public submit(): void{
-    if(this.model.id == 0){
-      this.requests.create(this.model).subscribe({
-        next: (response: TModel) => {
-          this.model = response;
-          this.title = 'edit';
-          this.onSubmit.emit();
-        }
-      });
-      return;
-    }
-    this.requests.update(this.model).subscribe({
-      next: (response: TModel) => {
-        this.model = response;
-        this.onSubmit.emit();
-      }
-    });
+    this.onSubmit.emit(this.model);
   }
 
   ngOnInit(): void {

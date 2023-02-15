@@ -1,13 +1,9 @@
 import {QueryParameters} from "./QueryParameters";
-import {SortOrder} from "./SortOrder";
+import {Auditory} from "../Models/Auditory";
 
-export class AuditoryParameters extends QueryParameters{
+export class AuditoryParameters extends QueryParameters<Auditory>{
   public name: string = '';
   public building: string = '';
-
-  public constructor() {
-    super(1, 10, SortOrder.Ascending, 'name');
-  }
 
   public override toQueryString(): string {
     return super.toQueryString() + `&auditoryName=${this.name}&buildingName=${this.building}`;
