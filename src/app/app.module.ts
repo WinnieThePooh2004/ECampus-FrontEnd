@@ -106,7 +106,8 @@ import {RouterModule} from "@angular/router";
       {path: '', component: HomeComponent},
       {path: 'auditories', component: AuditoriesComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'faculties', component: FacultiesComponent}
+      {path: 'faculties', component: FacultiesComponent},
+      {path: 'departments/:facultyId', component: DepartmentsComponent}
     ])
   ],
   providers: [],

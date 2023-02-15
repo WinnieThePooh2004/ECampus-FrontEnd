@@ -11,7 +11,7 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 @Component({
   template: ''
 })
-export class DataTableBase<TData extends Model, TParameters extends QueryParameters> implements OnInit{
+export class DataTableBase<TData extends Model, TParameters extends QueryParameters<TData>> implements OnInit{
   public pageSizeOptions = [5, 10, 20, 50, 100];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   public tableData: MatTableDataSource<TData> = new MatTableDataSource<TData>([]);

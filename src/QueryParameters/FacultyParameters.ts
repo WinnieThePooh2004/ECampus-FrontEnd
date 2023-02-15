@@ -1,6 +1,7 @@
 import {QueryParameters} from "./QueryParameters";
+import {Faculty} from "../Models/Faculty";
 
-export class FacultyParameters extends QueryParameters{
+export class FacultyParameters extends QueryParameters<Faculty>{
   public name: string = '';
 
   public constructor() {
