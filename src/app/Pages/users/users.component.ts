@@ -34,4 +34,8 @@ export class UsersComponent extends DataTableBase<User, UserParameters>{
       case UserRole.Teacher: return 'Teacher';
     }
   }
+
+  createNew() {
+    this.create(new User());
+  }
 }
