@@ -12,10 +12,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class DepartmentsComponent extends DataTableBase<Department, DepartmentParameters>{
   displayedColumns = ['position', 'name', 'actions'];
-  public constructor(requests: DepartmentsRequests, private route: ActivatedRoute) {
+  public constructor(requests: DepartmentsRequests, route: ActivatedRoute) {
     super(requests);
     this.parameters = new DepartmentParameters();
-    this.parameters.facultyId = Number(this.route.snapshot.paramMap.get('facultyId'));
+    this.parameters.facultyId = Number(route.snapshot.paramMap.get('facultyId'));
   }
 
   public nameChanged(name: string) {
@@ -24,7 +24,8 @@ export class DepartmentsComponent extends DataTableBase<Department, DepartmentPa
   }
 
   createNew() {
-    this.editModel = new Department();
-    this.editModel.facultyId = this.parameters.facultyId;
+    let model = new Department();
+    model.facultyId = this.parameters.facultyId;
+    this.create(model);
   }
 }

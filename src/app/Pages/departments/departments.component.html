@@ -9,7 +9,7 @@
 <br/>
 <div *ngIf="editModel != null">
   <app-department-edit-form [title]="editFormTitle" [model]="editModel"
-                         (onSubmit)="save($event)"></app-department-edit-form>
+                            (onSubmit)="save($event)"></app-department-edit-form>
   <br/>
 </div>
 <div>
@@ -34,10 +34,15 @@
     <td mat-cell *matCellDef="let department">
       <mat-button-toggle *ngIf="editEnabled" class="btn-info" (click)="edit(department.id)">Edit</mat-button-toggle>
       <span *ngIf="editEnabled"> | </span>
-      <mat-button-toggle class="btn-info">View groups</mat-button-toggle> |
-      <mat-button-toggle class="btn-info">View teachers</mat-button-toggle>
+      <mat-button-toggle class="btn-info">
+        <a style="color: #f0f0f0" href="groups/{{department.id}}">View groups</a>
+      </mat-button-toggle> |
+      <mat-button-toggle class="btn-info">
+        <a style="color: #f0f0f0" href="teachers/{{department.id}}">View teachers</a>
+      </mat-button-toggle>
       <span *ngIf="editEnabled"> | </span>
-      <mat-button-toggle *ngIf="editEnabled" class="btn-danger" (click)="delete(department.id)">Delete</mat-button-toggle>
+      <mat-button-toggle *ngIf="editEnabled" class="btn-danger" (click)="delete(department.id)">Delete
+      </mat-button-toggle>
     </td>
   </ng-container>
 

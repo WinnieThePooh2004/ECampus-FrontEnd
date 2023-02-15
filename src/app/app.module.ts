@@ -48,7 +48,7 @@ import {TimetableComponent} from './Pages/timetable/timetable.component';
 import {ProfileComponent} from './Pages/profile/profile.component';
 import {HomeComponent} from './Pages/home/home.component';
 import {RouterModule} from "@angular/router";
-import { UserEditFormComponent } from './Components/EditForms/user-edit-form/user-edit-form.component';
+import {UserEditFormComponent} from './Components/EditForms/user-edit-form/user-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +108,15 @@ import { UserEditFormComponent } from './Components/EditForms/user-edit-form/use
       {path: 'profile', component: ProfileComponent},
       {path: 'faculties', component: FacultiesComponent},
       {path: 'departments/:facultyId', component: DepartmentsComponent},
-      {path: 'users', component: UsersComponent}
+      {path: 'users', component: UsersComponent},
+      {path: 'groups/:departmentId', component: GroupsComponent},
+      {path: 'students/:groupId', component: StudentsComponent},
+      {path: 'teachers/:departmentId', component: TeachersComponent},
+      {path: 'signUp', component: SignUpComponent},
+      {path: 'subjects', component: SubjectsComponent},
+      {path: 'courses', component: CoursesComponent},
+      {path: 'tasks/:courseId', component: CourseTasksComponent},
+      {path: 'submissions/:courseTaskId', component: TaskSubmissionsComponent}
     ])
   ],
   providers: [],
