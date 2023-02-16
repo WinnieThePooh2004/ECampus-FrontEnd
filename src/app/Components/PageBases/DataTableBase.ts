@@ -76,12 +76,18 @@ export class DataTableBase<TData extends Model, TParameters extends QueryParamet
   public save(model: TData){
     if(model.id == 0){
       this.requests.create(model).subscribe({
-        next: () => this.refreshData()
+        next: () => {
+          this.refreshData();
+          this.editModel = null;
+        }
       });
       return;
     }
     this.requests.update(model).subscribe({
-      next: () => this.refreshData()
+      next: () => {
+        this.refreshData();
+        this.editModel = null;
+      }
     });
   }
 }

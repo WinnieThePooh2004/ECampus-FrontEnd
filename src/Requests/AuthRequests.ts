@@ -20,9 +20,13 @@ export class AuthRequests{
   }
 
   private setSession(result: LoginResult){
-    localStorage.setItem('token', result.token);
     localStorage.setItem('role', result.role);
+    localStorage.setItem('token', result.token);
     localStorage.setItem('email', result.email);
     localStorage.setItem('username', result.username);
+    localStorage.setItem('userId', result.userId.toString());
+    localStorage.setItem('groupId', result.groupId?.toString() ?? '0');
+    localStorage.setItem('studentId', result.studentId?.toString() ?? '0');
+    localStorage.setItem('teacherId', result.teacherId?.toString() ?? '0');
   }
 }
