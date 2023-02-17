@@ -52,7 +52,9 @@ import {UserEditFormComponent} from './Components/EditForms/user-edit-form/user-
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {MY_FORMATS} from "./DateFormat";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
 @NgModule({
   declarations: [
@@ -125,9 +127,10 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}],
   bootstrap: [AppComponent]
 })
 

@@ -8,6 +8,8 @@ import {Teacher} from "../../../../Models/Teacher";
 import {MatPaginator} from "@angular/material/paginator";
 import {SingleSelectBase} from "../../SingleSelectBase";
 import {QueryParameters} from "../../../../QueryParameters/QueryParameters";
+import {StudentsRequests} from "../../../../Requests/StudentsRequests";
+import {TeachersRequests} from "../../../../Requests/TeachersRequests";
 
 @Component({
   selector: 'app-user-edit-form',
@@ -20,12 +22,12 @@ export class UserEditFormComponent extends EditFormBase<User> implements AfterVi
   @ViewChild('teacherPaginator') public readonly teacherTablePaginator!: MatPaginator;
   public displayColumns = ['position', 'lastName', 'firstName', 'select'];
   pageSizeOptions = QueryParameters.pageSizeOptions;
-
-  public constructor(
-    public readonly studentSingleSelect: SingleSelectBase<Student, StudentParameters>,
-    public readonly teacherSingleSelect: SingleSelectBase<Teacher, TeacherParameters>
-  ) {
+  public readonly studentSingleSelect: SingleSelectBase<Student, StudentParameters>;
+  public readonly teacherSingleSelect: SingleSelectBase<Teacher, TeacherParameters>;
+  public constructor(studentRequests: StudentsRequests, teacherRequests: TeachersRequests) {
     super();
+    this.studentSingleSelect = new SingleSelectBase<Student, StudentParameters>(studentRequests);
+    this.teacherSingleSelect = new SingleSelectBase<Teacher, TeacherParameters>(teacherRequests);
     this.studentSingleSelect.parameters.userIdCanBeNull = false;
     this.teacherSingleSelect.parameters.userIdCanBeNull = false;
     this.studentSingleSelect.onChanged.subscribe(event => this.model.studentId = event);

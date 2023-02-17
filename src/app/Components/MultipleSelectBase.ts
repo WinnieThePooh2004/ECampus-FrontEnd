@@ -4,11 +4,7 @@ import {ParametersRequests} from "../../Requests/ParametersRequests";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Sort} from "@angular/material/sort";
-import {Injectable} from "@angular/core";
 
-@Injectable({
-  providedIn: "root"
-})
 export class MultipleSelectBase<TData extends Model, TParameter extends QueryParameters<TData>> {
   public paginator!: MatPaginator;
   public dataSource = new MatTableDataSource<TData>([]);

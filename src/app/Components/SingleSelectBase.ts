@@ -4,11 +4,8 @@ import {ParametersRequests} from "../../Requests/ParametersRequests";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Sort} from "@angular/material/sort";
-import {EventEmitter, Injectable} from "@angular/core";
+import {EventEmitter} from "@angular/core";
 
-@Injectable({
-  providedIn: "root"
-})
 export class SingleSelectBase<TData extends Model, TParameters extends QueryParameters<TData>>{
   public paginator!: MatPaginator;
   public onChanged = new EventEmitter<number>();

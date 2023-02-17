@@ -6,19 +6,21 @@ import {Teacher} from "../../../../Models/Teacher";
 import {TeacherParameters} from "../../../../QueryParameters/TeacherParameters";
 import {QueryParameters} from "../../../../QueryParameters/QueryParameters";
 import {MultipleSelectBase} from "../../MultipleSelectBase";
+import {TeachersRequests} from "../../../../Requests/TeachersRequests";
 
 @Component({
   selector: 'app-subject-edit-form',
   templateUrl: './subject-edit-form.component.html',
-  styleUrls: ['./subject-edit-form.component.css']
+  styleUrls: ['./subject-edit-form.component.css'],
 })
 export class SubjectEditFormComponent extends EditFormBase<Subject> implements AfterViewInit {
   @ViewChild(MatPaginator) public paginator!: MatPaginator;
   public displayColumns = ['position', 'firstName', 'lastName', 'userEmail', 'select'];
   pageSizeOptions = QueryParameters.pageSizeOptions;
-
-  public constructor(public readonly teachersSelect: MultipleSelectBase<Teacher, TeacherParameters>) {
+  public readonly teachersSelect: MultipleSelectBase<Teacher, TeacherParameters>;
+  public constructor(requests: TeachersRequests) {
     super();
+    this.teachersSelect = new MultipleSelectBase<Teacher, TeacherParameters>(requests);
     this.teachersSelect.parameters = new TeacherParameters();
   }
 
