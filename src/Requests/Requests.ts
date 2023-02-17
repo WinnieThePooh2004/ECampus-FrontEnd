@@ -9,7 +9,8 @@ export class Requests<TData>{
   }
 
   public getById(id: number): Observable<TData>{
-    return this.client.get<TData>(`${this.url}/${id.toString()}`);
+    let headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token')! };
+    return this.client.get<TData>(`${this.url}/${id.toString()}`, {headers: headers});
   }
 
   public update(item: TData): Observable<any>{

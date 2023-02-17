@@ -1,1 +1,121 @@
-<p>user-edit-form works!</p>
+<div class="{{isStudent() || isTeacher() ? 'form-place-large' : 'form-place'}}">
+  <div class="form-background">
+    <h2 class="form-title">{{title}}</h2>
+    <div class="form-group">
+      <form class="form" (submit)="submit()">
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Username</mat-label>
+          <input matInput [value]="model.username" (change)="model.username = $any($event.target).value">
+        </mat-form-field>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Email</mat-label>
+          <input matInput [value]="model.email" (change)="model.email = $any($event.target).value">
+        </mat-form-field>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Role</mat-label>
+          <mat-select [value]="model.role" (valueChange)="changeRole($event)">
+            <mat-option [value]="0">Guest</mat-option>
+            <mat-option [value]="1">Student</mat-option>
+            <mat-option [value]="2">Teacher</mat-option>
+            <mat-option [value]="3">Admin</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="isStudent()" class="form-table">
+          <div>
+            <mat-form-field class="mat-form-field">
+              <mat-label>First name</mat-label>
+              <input matInput [value]="studentSingleSelect.parameters.firstName" (input)="studentsFirstNameChanged($any($event.target).value)">
+            </mat-form-field>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Last name</mat-label>
+              <input matInput [value]="studentSingleSelect.parameters.lastName" (input)="studentsLastNameChanged($any($event.target).value)">
+            </mat-form-field>
+          </div>
+          <table [dataSource]="studentSingleSelect.dataSource" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="studentSingleSelect.sortChanged($event)">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1 + (studentSingleSelect.parameters.pageNumber - 1) * studentSingleSelect.parameters.pageSize}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+              <td mat-cell *matCellDef="let student">{{student.lastName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>First name</th>
+              <td mat-cell *matCellDef="let student">{{student.firstName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>Select</th>
+              <td mat-cell *matCellDef="let student">
+                <mat-checkbox [checked]="studentSingleSelect.isSelected(student.id)"
+                              (change)="studentSingleSelect.changed(student.id)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+            <tr mat-row *matRowDef="let _; columns: displayColumns;"></tr>
+          </table>
+          <mat-paginator #studentPaginator (page)="studentSingleSelect.paginationInfoChanged($event)"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [pageIndex]="studentSingleSelect.parameters.pageNumber - 1"
+                         [pageSize]="studentSingleSelect.parameters.pageSize"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+        <div *ngIf="isTeacher()" class="form-table">
+          <div>
+            <mat-form-field class="mat-form-field">
+              <mat-label>First name</mat-label>
+              <input matInput [value]="teacherSingleSelect.parameters.firstName" (input)="teachersFirstNameChanged($any($event.target).value)">
+            </mat-form-field>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Last name</mat-label>
+              <input matInput [value]="teacherSingleSelect.parameters.lastName" (input)="teachersLastNameChanged($any($event.target).value)">
+            </mat-form-field>
+          </div>
+          <table [dataSource]="teacherSingleSelect.dataSource" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="teacherSingleSelect.sortChanged($event)">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1 + (teacherSingleSelect.parameters.pageNumber - 1) * teacherSingleSelect.parameters.pageSize}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+              <td mat-cell *matCellDef="let teacher">{{teacher.lastName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>First name</th>
+              <td mat-cell *matCellDef="let teacher">{{teacher.firstName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>Select</th>
+              <td mat-cell *matCellDef="let teacher">
+                <mat-checkbox [checked]="teacherSingleSelect.isSelected(teacher.id)"
+                              (change)="teacherSingleSelect.changed(teacher.id)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+            <tr mat-row *matRowDef="let _; columns: displayColumns;"></tr>
+          </table>
+          <mat-paginator #teacherPaginator (page)="teacherSingleSelect.paginationInfoChanged($event)"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [pageIndex]="teacherSingleSelect.parameters.pageNumber - 1"
+                         [pageSize]="teacherSingleSelect.parameters.pageSize"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-group">
+    </div>
+  </div>
+</div>

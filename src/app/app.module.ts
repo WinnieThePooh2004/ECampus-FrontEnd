@@ -49,6 +49,12 @@ import {ProfileComponent} from './Pages/profile/profile.component';
 import {HomeComponent} from './Pages/home/home.component';
 import {RouterModule} from "@angular/router";
 import {UserEditFormComponent} from './Components/EditForms/user-edit-form/user-edit-form.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {MY_FORMATS} from "./DateFormat";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
 @NgModule({
   declarations: [
@@ -117,9 +123,14 @@ import {UserEditFormComponent} from './Components/EditForms/user-edit-form/user-
       {path: 'courses', component: CoursesComponent},
       {path: 'tasks/:courseId', component: CourseTasksComponent},
       {path: 'submissions/:courseTaskId', component: TaskSubmissionsComponent}
-    ])
+    ]),
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}],
   bootstrap: [AppComponent]
 })
 

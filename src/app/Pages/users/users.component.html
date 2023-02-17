@@ -1,4 +1,17 @@
 <h2>All users:</h2>
+<div *ngIf="editEnabled">
+  <button (click)="createNew()" class="btn-success btn-action">Create new</button>
+  <span *ngIf="editModel != null"> | </span>
+  <button *ngIf="editModel != null" (click)="cancelEdit()" class="btn-danger btn-action">
+    Cancel
+  </button>
+</div>
+<br/>
+<div *ngIf="editModel != null">
+  <app-user-edit-form [title]="editFormTitle" [model]="editModel"
+                            (onSubmit)="save($event)"></app-user-edit-form>
+  <br/>
+</div>
 <div>
   <mat-form-field class="mat-form-field">
     <mat-label>Email</mat-label>

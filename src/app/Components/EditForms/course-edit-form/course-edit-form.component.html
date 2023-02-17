@@ -1,1 +1,149 @@
-<p>course-edit-form works!</p>
+<div class="form-place-large">
+  <div class="form-background">
+    <h2 class="form-title">{{title}}</h2>
+    <div class="form-group">
+      <form class="form" (submit)="submit()">
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [value]="model.name" (change)="model.name = $any($event.target).value">
+        </mat-form-field>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date"
+                   [value]="model.startDate" (dateChange)="startDateChanged($any($event.target).value)">
+            <input matEndDate placeholder="End date"
+                   [value]="model.endDate" (dateChange)="endDateChanged($any($event.target).value)">
+          </mat-date-range-input>
+          <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+        <div class="form-table-group">
+          <h2>Select subject</h2>
+          <div>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Name</mat-label>
+              <input matInput [value]="subjectSelect.parameters.name" (input)="subjectNameChanged($any($event.target).value)">
+            </mat-form-field>
+          </div>
+          <table [dataSource]="subjectSelect.dataSource" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="subjectSelect.sortChanged($event)">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1 + (subjectSelect.parameters.pageNumber - 1) * subjectSelect.parameters.pageSize}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+              <td mat-cell *matCellDef="let group">{{group.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>Select</th>
+              <td mat-cell *matCellDef="let teacher">
+                <mat-checkbox [checked]="subjectSelect.isSelected(teacher.id)"
+                              (change)="subjectSelect.changed(teacher.id)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="groupAndSubjectColumns"></tr>
+            <tr mat-row *matRowDef="let _; columns: groupAndSubjectColumns;"></tr>
+          </table>
+          <mat-paginator #subjectsPaginator (page)="subjectSelect.paginationInfoChanged($event)"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [pageIndex]="subjectSelect.parameters.pageNumber - 1" [pageSize]="subjectSelect.parameters.pageSize"
+                         aria-label="Select page">
+          </mat-paginator>
+          <h2>Select teachers</h2>
+          <div>
+            <mat-form-field class="mat-form-field">
+              <mat-label>First name</mat-label>
+              <input matInput [value]="teachersSelect.parameters.firstName" (input)="teacherFirstNameChanged($any($event.target).value)">
+            </mat-form-field>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Last name</mat-label>
+              <input matInput [value]="teachersSelect.parameters.lastName" (input)="teacherLastNameChanged($any($event.target).value)">
+            </mat-form-field>
+          </div>
+          <table [dataSource]="teachersSelect.dataSource" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="teachersSelect.sortChanged($event)">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1 + (teachersSelect.parameters.pageNumber - 1) * teachersSelect.parameters.pageSize}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+              <td mat-cell *matCellDef="let teacher">{{teacher.lastName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>First name</th>
+              <td mat-cell *matCellDef="let teacher">{{teacher.firstName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+              <td mat-cell *matCellDef="let teacher">{{teacher.userEmail}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>Select</th>
+              <td mat-cell *matCellDef="let teacher">
+                <mat-checkbox [checked]="teachersSelect.isSelected(teacher.id)"
+                              (change)="teachersSelect.change(teacher.id, $event.checked)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="teachersColumns"></tr>
+            <tr mat-row *matRowDef="let _; columns: teachersColumns;"></tr>
+          </table>
+          <mat-paginator #teachersPaginator (page)="teachersSelect.paginationInfoChanged($event)"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [pageIndex]="teachersSelect.parameters.pageNumber - 1" [pageSize]="teachersSelect.parameters.pageSize"
+                         aria-label="Select page">
+          </mat-paginator>
+          <br/>
+          <h2>Select groups</h2>
+          <div>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Last name</mat-label>
+              <input matInput [value]="groupsSelect.parameters.name" (input)="groupNameChanged($any($event.target).value)">
+            </mat-form-field>
+          </div>
+          <table [dataSource]="groupsSelect.dataSource" mat-table class="mat-elevation-z7 table" matSort (matSortChange)="groupsSelect.sortChanged($event)">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1 + (groupsSelect.parameters.pageNumber - 1) * groupsSelect.parameters.pageSize}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+              <td mat-cell *matCellDef="let group">{{group.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>Select</th>
+              <td mat-cell *matCellDef="let teacher">
+                <mat-checkbox [checked]="groupsSelect.isSelected(teacher.id)"
+                              (change)="groupsSelect.change(teacher.id, $event.checked)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="groupAndSubjectColumns"></tr>
+            <tr mat-row *matRowDef="let _; columns: groupAndSubjectColumns;"></tr>
+          </table>
+          <mat-paginator #groupsPaginator (page)="groupsSelect.paginationInfoChanged($event)"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [pageIndex]="groupsSelect.parameters.pageNumber - 1" [pageSize]="groupsSelect.parameters.pageSize"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </form>
+    </div>
+    <div class="form-group">
+    </div>
+  </div>
+</div>
