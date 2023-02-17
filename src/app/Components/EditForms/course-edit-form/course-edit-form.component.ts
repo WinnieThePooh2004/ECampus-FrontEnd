@@ -18,7 +18,6 @@ import {MY_FORMATS} from "../../../DateFormat";
 import {DatePipe} from "@angular/common";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import {QueryParameters} from "../../../../QueryParameters/QueryParameters";
-import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-course-edit-form',
@@ -45,7 +44,6 @@ export class CourseEditFormComponent extends EditFormBase<Course> implements Aft
   public readonly subjectSelect: SingleSelectBase<Subject, SubjectParameters>;
   public readonly teachersSelect: MultipleSelectBase<Teacher, TeacherParameters>;
   public readonly groupsSelect: MultipleSelectBase<Group, GroupParameters>
-  public dateRange!: FormGroup;
   public constructor(subjectRequests: SubjectsRequests, teacherRequests: TeachersRequests,
                      groupRequests: GroupRequests) {
     super();
@@ -71,13 +69,6 @@ export class CourseEditFormComponent extends EditFormBase<Course> implements Aft
     this.groupsSelect.refreshData();
   }
 
-  public override ngOnInit() {
-    this.dateRange = new FormGroup({
-      start: new FormControl<Date>(this.model.startDate),
-      end: new FormControl<Date>(this.model.endDate)
-    });
-  }
-
   public subjectNameChanged(name: string) {
     this.subjectSelect.parameters.name = name;
     this.subjectSelect.refreshData();
@@ -99,12 +90,10 @@ export class CourseEditFormComponent extends EditFormBase<Course> implements Aft
   }
 
   public startDateChanged(date: Date) {
-    console.log('here');
     this.model.startDate = date;
   }
 
   public endDateChanged(date: Date) {
-    console.log('here');
     this.model.endDate = date;
   }
 }

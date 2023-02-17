@@ -9,11 +9,11 @@
         </mat-form-field>
         <mat-form-field class="mat-form-field form-field">
           <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
-            <input matStartDate placeholder="Start date" formControlName="start"
-                   [value]="model.startDate" (change)="startDateChanged($any($event.target).value)">
-            <input matEndDate placeholder="End date" formControlName="end"
-                   [value]="model.endDate" (change)="endDateChanged($any($event.target).value)">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date"
+                   [value]="model.startDate" (dateChange)="startDateChanged($any($event.target).value)">
+            <input matEndDate placeholder="End date"
+                   [value]="model.endDate" (dateChange)="endDateChanged($any($event.target).value)">
           </mat-date-range-input>
           <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
