@@ -14,12 +14,10 @@ export abstract class QueryParameters<TModel extends Model>{
     return `pageNumber=${this.pageNumber}&pageSize=${this.pageSize}&sortOrder=${this.sortOrder}&orderBy=${this.orderBy}`;
   }
 
-  public change(event: Sort){
-    if(this.orderBy == event.active){
-      this.sortOrder = (this.sortOrder + 1) % 2;
-      return;
-    }
-    this.orderBy = event.active;
+  public change(sort: Sort){
+    this.sortOrder = sort.direction == 'asc' ? SortOrder.Ascending : SortOrder.Descending;
+    this.orderBy = sort.active;
+
   }
 
   public changePaginationData(event: PageEvent){

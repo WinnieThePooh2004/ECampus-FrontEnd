@@ -5,22 +5,21 @@ import {ParametersRequests} from "../../../Requests/ParametersRequests";
 import {MatTableDataSource} from "@angular/material/table";
 import {PaginationResponse} from "../../../Models/PaginationResponse";
 import {Sort} from "@angular/material/sort";
-import {SortOrder} from "../../../QueryParameters/SortOrder";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 
 @Component({
   template: ''
 })
 export class DataTableBase<TData extends Model, TParameters extends QueryParameters<TData>> implements OnInit{
-  public pageSizeOptions = [5, 10, 20, 50, 100];
+  public pageSizeOptions = QueryParameters.pageSizeOptions;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  public tableData: MatTableDataSource<TData> = new MatTableDataSource<TData>([]);
+  public readonly tableData: MatTableDataSource<TData> = new MatTableDataSource<TData>([]);
   public editModel: TData | null = null;
   public editFormTitle: string = '';
   public editEnabled = false;
   protected parameters!: TParameters;
 
-  public constructor(private requests: ParametersRequests<TData, TParameters>) {
+  public constructor(private readonly requests: ParametersRequests<TData, TParameters>) {
     this.editEnabled = localStorage.getItem('role') == 'Admin';
   }
 
@@ -29,8 +28,7 @@ export class DataTableBase<TData extends Model, TParameters extends QueryParamet
   }
 
   public sortChanged(sort: Sort){
-    this.parameters.sortOrder = sort.direction == 'asc' ? SortOrder.Ascending : SortOrder.Descending;
-    this.parameters.orderBy = sort.active;
+    this.parameters.change(sort);
     this.refreshData();
   }
 
@@ -44,8 +42,7 @@ export class DataTableBase<TData extends Model, TParameters extends QueryParamet
   }
 
   public paginationInfoChanged(event: PageEvent): void{
-    this.parameters.pageNumber = event.pageIndex + 1;
-    this.parameters.pageSize = event.pageSize;
+    this.parameters.changePaginationData(event);
     this.refreshData();
   }
 
