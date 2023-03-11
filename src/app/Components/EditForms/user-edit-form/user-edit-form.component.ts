@@ -28,6 +28,8 @@ export class UserEditFormComponent extends EditFormBase<User> implements AfterVi
     super();
     this.studentSingleSelect = new SingleSelectBase<Student, StudentParameters>(studentRequests);
     this.teacherSingleSelect = new SingleSelectBase<Teacher, TeacherParameters>(teacherRequests);
+    this.studentSingleSelect.parameters = new StudentParameters();
+    this.teacherSingleSelect.parameters = new TeacherParameters();
     this.studentSingleSelect.parameters.userIdCanBeNull = false;
     this.teacherSingleSelect.parameters.userIdCanBeNull = false;
     this.studentSingleSelect.onChanged.subscribe(event => this.model.studentId = event);

@@ -7,6 +7,7 @@ export class TaskSubmission extends Model{
   public studentId = 0;
   public isMarked = false;
   public submissionContent = '';
+  public totalPoints = 0;
   public student: Student | null = null;
   public courseTask: CourseTask | null = null;
 }

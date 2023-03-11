@@ -1,0 +1,20 @@
+<div class="form-place">
+  <div class="form-background">
+    <h2 class="form-title">Mark <span *ngIf="model.student != null && model.student.userEmail != null">{{model.student.userEmail}}`s</span>
+      submission for task '{{model.courseTask!.name!}}'</h2>
+    <div class="form-group">
+      <form ngForm class="form" (submit)="submit()">
+        <p>Submission content: {{model.submissionContent}}</p>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Mark</mat-label>
+          <input type="number" matInput [value]="model.totalPoints.toString()"
+                 (change)="model.totalPoints = $any($event.target).value" placeholder="{{model.courseTask!.maxPoints}}">
+        </mat-form-field>
+        <br/>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

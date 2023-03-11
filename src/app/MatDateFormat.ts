@@ -1,4 +1,4 @@
-export const MY_FORMATS = {
+export const MAT_DATE_FORMAT = {
   parse: {
     dateInput: "DD-MM-YYYY"
   },

@@ -1,1 +1,54 @@
-<p>course-task-edit-form works!</p>
+<div class="form-place-medium">
+  <div class="form-background">
+    <h2 class="form-title">{{title}}</h2>
+    <div class="form-group">
+      <form ngForm class="form" (submit)="submit()">
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [value]="model.name" (input)="model.name = $any($event.target).value" placeholder="1">
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Deadline</mat-label>
+          <input matInput [ngxMatDatetimePicker]="$any(picker)"
+                 (dateChange)="this.model.deadline = $any($event.target).value"
+                 placeholder="Choose a date" [value]="model.deadline">
+          <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+                                   [stepHour]="1" [stepMinute]="1" [touchUi]="true"
+                                   [disableMinute]="false" [hideTime]="false">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+        <br/>
+        <div class="form-field" style="font-size: 15pt">
+          <mat-checkbox [value]="model.validAfterDeadline.toString()"
+                        (change)="model.validAfterDeadline = ($event.checked)"></mat-checkbox>
+          <mat-label>Valid after deadline</mat-label>
+        </div>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Max points</mat-label>
+          <input type="number" matInput [value]="model.coefficient.toString()"
+                 (change)="model.maxPoints = $any($event.target).value" placeholder="1">
+        </mat-form-field>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Coefficient</mat-label>
+          <input type="number" matInput [value]="model.coefficient.toString()"
+                 (change)="model.coefficient = $any($event.target).value" placeholder="1">
+        </mat-form-field>
+        <mat-form-field class="mat-form-field form-field">
+          <mat-label>Type</mat-label>
+          <mat-select>
+            <mat-option [value]="0">Classwork</mat-option>
+            <mat-option [value]="0">Homework</mat-option>
+            <mat-option [value]="0">Test</mat-option>
+            <mat-option [value]="0">Exam</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br/>
+        <div class="form-button">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

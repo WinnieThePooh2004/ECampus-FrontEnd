@@ -11,8 +11,12 @@ export class AuthRequests{
 
   public login(email: string, password: string){
     localStorage.clear();
-    email = 'initial.admin@super.com';
-    password = 'AdminAdmin1';
+    //email = 'initial.admin@super.com';
+    email = 'vova2004hunko@icloud.com';
+    //email = 'bohonov.blat@ecampus.com';
+    //password = 'AdminAdmin1';
+    password = 'tempPass1';
+    //password = 'tempPass1';
     return this.client.post<LoginResult>('http://localhost:5000/api/Auth/login', {email: email, password: password})
       .subscribe({
         next: (response: LoginResult) => this.setSession(response)

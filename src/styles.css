@@ -4,6 +4,12 @@
   padding-left: 28%;
 }
 
+.form-place-medium{
+  width: 60%;
+  position: relative;
+  padding-left: 20%;
+}
+
 .form-place-large{
   width: 80%;
   position: relative;

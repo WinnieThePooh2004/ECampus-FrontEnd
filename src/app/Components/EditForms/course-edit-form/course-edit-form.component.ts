@@ -14,7 +14,7 @@ import {TeachersRequests} from "../../../../Requests/TeachersRequests";
 import {GroupRequests} from "../../../../Requests/GroupRequests";
 import {MatPaginator} from "@angular/material/paginator";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
-import {MY_FORMATS} from "../../../DateFormat";
+import {MAT_DATE_FORMAT} from "../../../MatDateFormat";
 import {DatePipe} from "@angular/common";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import {QueryParameters} from "../../../../QueryParameters/QueryParameters";
@@ -29,7 +29,7 @@ import {QueryParameters} from "../../../../QueryParameters/QueryParameters";
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE]
     },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMAT},
     DatePipe
   ]
 })

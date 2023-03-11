@@ -12,7 +12,7 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 })
 export class DataTableBase<TData extends Model, TParameters extends QueryParameters<TData>> implements OnInit{
   public pageSizeOptions = QueryParameters.pageSizeOptions;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) public paginator!: MatPaginator;
   public readonly tableData: MatTableDataSource<TData> = new MatTableDataSource<TData>([]);
   public editModel: TData | null = null;
   public editFormTitle: string = '';

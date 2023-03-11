@@ -1,0 +1,23 @@
+<p *ngIf="model == null"><em>Loading...</em></p>
+<div *ngIf="model != null">
+  <h3>Submission for task '{{model.courseTask!.name}}'</h3>
+  <p *ngIf="model.isMarked">
+    Your current mark for this submission: {{model.totalPoints}}/{{model.courseTask!.maxPoints}}.
+  </p>
+  <div *ngIf="!model.isMarked && beforeDeadline()">
+    <p>{{untilDeadline()}} time left until deadline.</p>
+  </div>
+  <div *ngIf="!model.isMarked && !beforeDeadline()">
+    <p>Deadline was {{deadlineWas()}}</p>
+  </div>
+  <div>
+    <form (ngSubmit)="save()">
+      <mat-form-field>
+        <mat-label>Submission content</mat-label>
+        <textarea matInput [value]="model.submissionContent" (change)="model.submissionContent = $any($event.target).value"></textarea>
+      </mat-form-field>
+      <br/>
+      <button class="btn-success btn-action" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

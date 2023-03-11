@@ -11,8 +11,7 @@ export class ParametersRequests<TData extends Model, TParameters extends QueryPa
   }
 
   public getByParameters(parameters: TParameters): Observable<PaginationResponse<TData>> {
-    let headers = {'Authorization': 'Bearer ' + localStorage.getItem('token')!};
     return this.client.get<PaginationResponse<TData>>(
-      `${this.url}?${parameters.toQueryString()}`, {headers: headers});
+      `${this.url}?${parameters.toQueryString()}`);
   }
 }

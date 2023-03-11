@@ -7,7 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {AuditoriesComponent} from './Pages/auditories/auditories.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSortModule} from "@angular/material/sort";
 import {DataTableBase} from "./Components/PageBases/DataTableBase";
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -53,8 +53,16 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
-import {MY_FORMATS} from "./DateFormat";
+import {MAT_DATE_FORMAT} from "./MatDateFormat";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from "@angular-material-components/datetime-picker";
+import {EditSubmissionComponent} from './Pages/edit-submission/edit-submission.component';
+import {MarkSubmissionComponent} from './Pages/mark-submission/mark-submission.component';
+import {AuthInterceptor} from "../Requests/AuthInterceptor";
 
 @NgModule({
   declarations: [
@@ -91,6 +99,8 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
     ProfileComponent,
     HomeComponent,
     UserEditFormComponent,
+    EditSubmissionComponent,
+    MarkSubmissionComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,15 +132,23 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
       {path: 'subjects', component: SubjectsComponent},
       {path: 'courses', component: CoursesComponent},
       {path: 'tasks/:courseId', component: CourseTasksComponent},
-      {path: 'submissions/:courseTaskId', component: TaskSubmissionsComponent}
+      {path: 'submissions/:courseTaskId', component: TaskSubmissionsComponent},
+      {path: 'submission/edit/:courseTaskId', component: EditSubmissionComponent},
+      {path: 'submission/mark/:id', component: MarkSubmissionComponent},
     ]),
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
-  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}],
+  providers: [
+    {provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMAT},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 

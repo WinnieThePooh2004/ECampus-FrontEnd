@@ -2,13 +2,18 @@ import {Model} from "./Model";
 
 export class CourseTask extends Model{
   public name = '';
-  public deadline = Date.now() + 1000 * 60;
+  public deadline = new Date(Date.now() + 1000 * 60);
   public validAfterDeadline = false;
   public maxPoints = 0;
   public coefficient: number = 1;
   public courseId = 0;
+  public type = TaskType.Classwork;
+}
 
-  public absoluteMaxPoints(): number{
-    return this.maxPoints * this.coefficient;
-  }
+export enum TaskType
+{
+  Classwork,
+  Homework,
+  Test,
+  Exam
 }
